@@ -11,16 +11,16 @@ class PredictDisease():
 
         self.model = pickle.load(open(model_path, "rb"))
 
-    def probability(disease, features):
+    def probability(self, features):
+        features = np.array([features])
         return self.model.predict_proba(features)
 
-    def goToDoc(self, features, threshold):
-        features = np.array([features])
-        return self.probability(disease, features) > threshold
+    def goToDoc(self, features, threshold = 0.5):
+        return self.probability(features)[0][1] > threshold
 
 def main():
     p = PredictDisease("diabetes")
-    p.goToDoc(, .5)
+    print(p.goToDoc([1,2,3,4,5,6,7,8]))
 
 
 
