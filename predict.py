@@ -5,10 +5,9 @@ from sklearn.ensemble import RandomForestClassifier
 
 class PredictDisease():
     def __init__(self, disease):
-        model_path = "diabetes.pkl"
-        if disease == None:
-            model_path = None
-
+        if disease not in ["cardio", "diabetes", "liver"]:
+            print("Not a disease")
+        model_path = disease + ".pkl"
         self.model = pickle.load(open(model_path, "rb"))
 
     def probability(self, features):
@@ -16,6 +15,14 @@ class PredictDisease():
         return self.model.predict_proba(features)
 
     def goToDoc(self, features, threshold = 0.5):
+        """
+
+        :param features: Age,Gender,Total_Bilirubin,Direct_Bilirubin,Alkaline_Phosphotase,Alamine_Aminotransferase,Aspartate_Aminotransferase,Total_Protiens,Albumin,Albumin_and_Globulin_Ratio in liver
+        Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age in diabetes
+        id,age,gender,height,weight,ap_hi,ap_lo,cholesterol,gluc,smoke,alco,active in cardio
+        :param threshold: the threshold probability above which the patient should go to doctor
+        :return: whether the patient should consult doctor
+        """
         return self.probability(features)[0][1] > threshold
 
 def main():
