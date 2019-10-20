@@ -107,11 +107,13 @@ class PredictDiseaseSymptom():
 
 
 def main():
-    p = PredictDisease("cardio")
-    print(p.goToDoc([1,2,3,4,5,6,7,8,9,10,11,12]))
-    temp = PredictDiseaseSymptom("disease.pkl")
-    print(temp.predict(sys.argv[1:]))
-
+    if sys.argv[1] == "symptoms":
+        temp = PredictDiseaseSymptom("disease.pkl")
+        print(temp.predict(sys.argv[1:]))
+    else:
+        p = PredictDisease("cardio")
+        print(p.goToDoc([1,2,3,4,5,6,7,8,9,10,11,12]))
+    pass
 
 
 if __name__ == "__main__":
