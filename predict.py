@@ -17,6 +17,7 @@ class PredictDisease():
 
     def goToDoc(self, features, threshold = 0.3):
         """
+        gaand mara sahil sulekhiya
 
         :param features: Age,Gender,Total_Bilirubin,Direct_Bilirubin,Alkaline_Phosphotase,Alamine_Aminotransferase,Aspartate_Aminotransferase,Total_Protiens,Albumin,Albumin_and_Globulin_Ratio in liver
         Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age in diabetes
@@ -25,15 +26,13 @@ class PredictDisease():
         :return: whether the patient should consult doctor
         """
         prob = self.probability(features)[0][1]
-        print("Based on our observations, it is", round(100*prob,2), "% likely that you have", self.disease, "disorder.")
-        if prob > threshold:
-            print("Visit a doctor")
+        return prob
 
 
 
 def main():
     p = PredictDisease("cardio")
-    p.goToDoc([1,2,3,4,5,6,7,8,9,10,11,12])
+    print(p.goToDoc([1,2,3,4,5,6,7,8,9,10,11,12]))
 
 
 

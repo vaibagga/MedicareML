@@ -58,7 +58,7 @@ class PredictDiseaseSymptom():
         #print(feature_vector)
         test_dictionary = {
             'Fungal infection':"Visit Dermatologist", 'Allergy':"Visit Dermatologist", 'GERD':"Avoid lying down two hours after sleeping", 'Chronic cholestasis':"Visit urologist",
-             'Drug Reaction':"Visit physician immediately", 'Peptic ulcer diseae': "Take antacid", 'AIDS':"Visit physician", 'Diabetes ': "Diabetologist",
+             'Drug Reaction':"Visit physician immediately", 'Peptic ulcer diseae': "Take antacid", 'AIDS':"Visit physician", 'Diabetes ': "Take glucose test",
              'Gastroenteritis':"Take antacid", 'Bronchial Asthma':"Visit pulmonologist", 'Hypertension ': "Visit cardiologist", 'Migraine': "Visit physician",
              'Cervical spondylosis':"Visit physician", 'Paralysis (brain hemorrhage)':"Visit neurologist", 'Jaundice':"Take bilurubin blood test",
              'Malaria':"Take blood smear test", 'Chicken pox':"Visit physician and remain isolated", 'Dengue':"Take PCR test", 'Typhoid':"Visit physician", 'hepatitis A':"Visit physician",
