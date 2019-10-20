@@ -5,6 +5,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 class PredictDisease():
     def __init__(self, disease):
+        self.disease = disease
         if disease not in ["cardio", "diabetes", "liver"]:
             print("Not a disease")
         model_path = disease + ".pkl"
@@ -14,7 +15,7 @@ class PredictDisease():
         features = np.array([features])
         return self.model.predict_proba(features)
 
-    def goToDoc(self, features, threshold = 0.5):
+    def goToDoc(self, features, threshold = 0.3):
         """
 
         :param features: Age,Gender,Total_Bilirubin,Direct_Bilirubin,Alkaline_Phosphotase,Alamine_Aminotransferase,Aspartate_Aminotransferase,Total_Protiens,Albumin,Albumin_and_Globulin_Ratio in liver
@@ -23,11 +24,16 @@ class PredictDisease():
         :param threshold: the threshold probability above which the patient should go to doctor
         :return: whether the patient should consult doctor
         """
-        return self.probability(features)[0][1] > threshold
+        prob = self.probability(features)[0][1]
+        print("Based on our observations, it is", round(100*prob,2), "% likely that you have", self.disease, "disorder.")
+        if prob > threshold:
+            print("Visit a doctor")
+
+
 
 def main():
-    p = PredictDisease("diabetes")
-    print(p.goToDoc([1,2,3,4,5,6,7,8]))
+    p = PredictDisease("cardio")
+    p.goToDoc([1,2,3,4,5,6,7,8,9,10,11,12])
 
 
 
