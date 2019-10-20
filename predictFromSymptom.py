@@ -45,7 +45,7 @@ class PredictDiseaseSymptom():
        'lack_of_concentration', 'visual_disturbances',
        'receiving_blood_transfusion', 'receiving_unsterile_injections',
        'coma', 'stomach_bleeding', 'distention_of_abdomen',
-       'history_of_alcohol_consumption', 'fluid_overload.1',
+       'ches', 'fluid_overload.1',
        'blood_in_sputum', 'prominent_veins_on_calf', 'palpitations',
        'painful_walking', 'pus_filled_pimples', 'blackheads', 'scurring',
        'skin_peeling', 'silver_like_dusting', 'small_dents_in_nails',
@@ -55,13 +55,26 @@ class PredictDiseaseSymptom():
         for symptom in symptoms:
             if symptom in symptom_list:
                 feature_vector[symptom_list.index(symptom)] = 1
-        print(feature_vector)
+        #print(feature_vector)
+        test_dictionary = {
+            'Fungal infection':"Visit Dermatologist", 'Allergy':"Visit Dermatologist", 'GERD':"Avoid lying down two hours after sleeping", 'Chronic cholestasis':"Visit urologist",
+             'Drug Reaction':"Visit physician immediately", 'Peptic ulcer diseae': "Take antacid", 'AIDS':"Visit physician", 'Diabetes ': "Diabetologist",
+             'Gastroenteritis':"Take antacid", 'Bronchial Asthma':"Visit pulmonologist", 'Hypertension ': "Visit cardiologist", 'Migraine': "Visit physician",
+             'Cervical spondylosis':"Visit physician", 'Paralysis (brain hemorrhage)':"Visit neurologist", 'Jaundice':"Take bilurubin blood test",
+             'Malaria':"Take blood smear test", 'Chicken pox':"Visit physician and remain isolated", 'Dengue':"Take PCR test", 'Typhoid':"Visit physician", 'hepatitis A':"Visit physician",
+             'Hepatitis B':"Visit physician", 'Hepatitis C':"Visit physician", 'Hepatitis D':"Visit physician", 'Hepatitis E':"Visit physician",
+             'Alcoholic hepatitis':"Visit physician", 'Tuberculosis':"TB test recommended", 'Common Cold':"Self treatable", 'Pneumonia':"Visit physician",
+             'Dimorphic hemmorhoids(piles)':"Visit physician", 'Heart attack':"Visit cardiologist immediately", 'Varicose veins': "No apparent disease, visit a physician if symptoms get worse",
+             'Hypothyroidism':"Visit physician", 'Hyperthyroidism':"Visit physician", 'Hypoglycemia':"Visit physician",
+             'Osteoarthristis':"Visit orthopaedist", 'Arthritis':"Visit orthopaedist",
+             '(vertigo) Paroymsal  Positional Vertigo':"Visit orthopaedist", 'Acne':"Visit Dermatologist",
+             'Urinary tract infection': "Visit urologist", 'Psoriasis':"Visit physician", 'Impetigo': "Visit physician"
+
+        }
         feature_vector = np.array([feature_vector])
         if np.max(self.model.predict_proba(feature_vector)) > 0.9:
-            if (self.model.predict(feature_vector)) == ['Varicose veins']:
-                return None
-            return self.model.predict(feature_vector)
-        return None
+            return test_dictionary[self.model.predict(feature_vector)[0]]
+        return "No apparent disease, visit a physician if symptoms get worse"
 
 def main():
     temp = PredictDiseaseSymptom("disease.pkl")
